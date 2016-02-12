@@ -1,0 +1,3 @@
+﻿  NeuralNet.cpp
+NeuralNet.obj : error LNK2001: unresolved external symbol "public: static float __cdecl NeuralNet::activationFunction(float)" (?activationFunction@NeuralNet@@SAMM@Z)
+E:\Documentos\Visual Studio 2015\Projects\Foresee\x64\Release\Foresee.exe : fatal error LNK1120: 1 unresolved externals

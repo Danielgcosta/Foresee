@@ -1,0 +1,10 @@
+﻿  Foresee.cpp
+Foresee.cpp(37): error C2664: 'void NeuralNet::printMatrix(std::vector<std::vector<float,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>)': cannot convert argument 1 from 'std::vector<float,std::allocator<_Ty>>' to 'std::vector<std::vector<float,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>'
+          with
+          [
+              _Ty=float
+          ]
+  Foresee.cpp(37): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  NeuralNet.cpp
+NeuralNet.cpp(97): warning C4018: '<': signed/unsigned mismatch
+NeuralNet.cpp(101): warning C4018: '<=': signed/unsigned mismatch
