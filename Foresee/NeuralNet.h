@@ -14,107 +14,173 @@ private:
 public:
 	// Construtor
 	NeuralNet();
-	// Desconstrutor
+	// Destrutor
 	~NeuralNet();
 
 	/*
-	@param[in]	float lowerBound	primeiro limitador
-	@param[in]	float upperBound	segundo limitador
-	@Return		float				número aleatório entre dois números
+	Retorna um número aleatório entre lowerBound e upperBound.
+	@param[in]	primeiro limitador
+	@param[in]	segundo limitador
+	@return[out]	número aleatório entre dois números
 	*/
 	static float getRandomBetween(float lowerBound, float upperBound);
 
 
 	/*
-	* @param[in]	int		rows				número de linhas
-	* @param[in]	int		columns				número de colunas
-	* @param[in]	float	randomLowerBound	limite inferior do número aleatório
-	* @param[in]	float	randomUpperBound	limite superior do número aleatório
-	* @Return vector<vector<float>>	matriz aleatória
+	Gera uma matriz aleatória.
+	@param[in]	número de linhas
+	@param[in]	número de colunas
+	@param[in]	limite inferior do número aleatório
+	@param[in]	limite superior do número aleatório
+	@return[out] matriz aleatória
 	*/
 	static std::vector< std::vector<float> > randomMatrixCreator(int rows, int columns, float randomLowerBound, float randomUpperBound);
 	
 	
 	/*
-	* @param[in]	int		rows				número de linhas
-	* @param[in]	int		columns				número de colunas
-	* @param[in]	float	randomLowerBound	limite inferior do número aleatório
-	* @param[in]	float	randomUpperBound	limite superior do número aleatório
-	* @Return vector<vector<float>>	matriz aleatória
+	Gera um vetor aleatório.
+	@param[in]	número de linhas
+	@param[in]	número de colunas
+	@param[in]	limite inferior do número aleatório
+	@param[in]	limite superior do número aleatório
+	@return[out] vetor aleatório
 	*/
 	static std::vector<float> randomVectorCreator(int rows, float randomLowerBound, float randomUpperBound);
 
 
 	/*
-	* @param[in]	vector<vector<float>>	matriz
+	Imprime a matriz no terminal.
+	@param[in]	matriz
 	*/
 	static void printMatrix(std::vector< std::vector<float> > matrix);
 
 	/*
-	* @param[in]	vector<vector<float>>	matriz
+	Imprime o vetor no terminal.
+	@param[in]	vetor
 	*/
 	static void printVector(std::vector<float> row);
 
 
 	/*
-	* @param[in]	vector<vector<float>>	matriz
-	* @param[in]	int&	linhas
-	* @param[in]	int&	colunas
+	Retorna o tamanho da matriz.
+	@param[in]	matriz
+	@param[in]	& linhas
+	@param[in]	& colunas
 	*/
 	static void getMatrixSize(int &rows, int &columns, std::vector< std::vector<float> > matrix);
 	
 
 	/*
-	* @param[in]	vector<vector<float>>	matriz de pesos da rede
-	* @param[in]	vector<float>	inputs da rede
-	* return		float	saída do neurônio
+	Adiciona o vetor como linha na matrix.
+	@param[in]	vetor
+	@param[in]	& matriz
 	*/
-	static std::vector<float> feedForward(std::vector<std::vector<float>> weightMatrix, std::vector<float> input, std::vector<float> &net);
+	static void addRowToMatrix(std::vector<float>, std::vector< std::vector<float> > &);
 
 
 	/*
-	* @param[in]	vector<float>	matriz de pesos
-	* @param[in]	vector<float>	inputs da rede
-	* return		float			saída do neurônio
+	Multiplica duas matrizes.
+	@param[in]	matriz
+	@param[in]	matriz
+	@return[out] matriz
 	*/
-	static float feedForward(std::vector<float> weightVector, std::vector<float> input, float &net);
+	static std::vector<std::vector<float>> multiplyMatrix(std::vector<std::vector<float>> matrix_1, std::vector<std::vector<float>>matrix_2);
+
+	static std::vector<std::vector<float>> multiplyMatrix(std::vector<float> matrix_1, std::vector<std::vector<float>> matrix_2);
+
+	static std::vector<std::vector<float>> multiplyMatrix(std::vector<std::vector<float>> matrix_1, std::vector<float> matrix_2);
+
+	/*
+	Soma um vetor a outro, elemento a elemento
+	*/
+	static void sumToVector(std::vector<float> &row_1, std::vector<float> row_2);
+
+	static void sumToVector(std::vector<float> &row, float value);
+
+	/*
+	Calcula a NET de todos os neurônios da camada.
+	@param[in]	matriz de pesos da camada
+	@param[in]	inputs da camada
+	@return[out]	saída da camada
+	*/
+	static std::vector<float> feedForward(std::vector<float> input, std::vector<std::vector<float>> weightMatrix);
+
+
+	/*
+	Calcula a NET de todos os neurônios da camada.
+	@param[in]	matriz de pesos da camada
+	@param[in]	inputs da camada
+	@return[out]	saída da camada
+	*/
+	static float feedForward(std::vector<float> input, std::vector<float> weightVector);
+
+
+	/*
+	Calcula o erro do neurônio de saída.
+	@param[in]	objetivo do neurônio
+	@param[in]	saída do neurônio
+	@param[in]	net da camada de saída
+	@return[out]	erro do neurônio de saída
+	*/
+	static float calculateOutputNeuronError(float target, float output, float net);
 
 	static std::vector<float> calculateOutputNeuronError(std::vector<float> target, std::vector<float> output, std::vector<float> net);
 
 	/*
-	* Calcula o erro de um neurônio da camada escondida
+	Calcula os erros dos neurônios da camada escondida.
+	@param[in]	vetor de erros dos neurônios da camada seguinte
+	@param[in]	matriz de pesos da camada
+	@param[in]	net da camada escondida de origem
+	@return[out]	erro do neurônio da camada escondida de origem
+	*/
+	static std::vector<float> NeuralNet::calculateHiddenNeuronError(float outputError, std::vector<std::vector<float>> weightMatrix, std::vector<float> net);
+
 	static std::vector<float> calculateHiddenNeuronError(std::vector<float> outputError, std::vector<std::vector<float>> weightMatrix, std::vector<float> net);
 
 
 	/*
-	 * @param[in] float	soma ponderada das entradas e pesos do neurônio
-	 * @param[in] string	função a ser utilizada. Por enquanto só tanh como função de ativação disponível
-	 * @Return float	saída do neurônio
-	 */
+	Corrije as matrizes de pesos.
+	@param[in]	matrix de pesos a corrigir
+	@param[in]	taxa de aprendizado
+	@param[in]	erro do(s) neurônio(s) 
+	@param[in]	entrada do(s) neurônio(s)
+	*/
+	static void adjustWeightMatrix(std::vector<float> &weightMatrix, float learningRate, float neuronError, std::vector<float>input);
+	
+	static void adjustWeightMatrix(std::vector<std::vector<float>> &weightMatrix, float learningRate, std::vector<float> neuronError, std::vector<float>input);
+
+	static void adjustWeightMatrix(std::vector<std::vector<float>> &weightMatrix, float learningRate, float neuronError, std::vector<float>input);
+
+	/*
+	Organiza os dados temporais em uma matriz. 
+	Cada linha é uma amostra para treinamento
+	*/
+	static std::vector<std::vector<float>> prepareTimeSeriesForInput(std::vector<float> timeData, int windowSize, std::vector<float> &target);
+	
+
+	/*
+	Função de ativação dos neurônios
+	@param[in] float	soma ponderada das entradas e pesos do neurônio	 
+		TODO: Por enquanto só tanh como função de ativação disponível.
+			@param[in] string	função a ser utilizada.
+			Possibilitar entrada de texto ex.: "tanh" para escolher a função de ativação
+	@return[out] float	saída do neurônio
+	*/
 	static float activationFunction(float net);
+
+	static std::vector<float> activationFunction(std::vector<float> net);
 	
 	
 	/*
-	 * @param[in] float		soma ponderada das entradas e pesos do neurônio
-	 * @param[in] string		função a ser utilizada para ativação. Aqui será utilizada a derivada. 
-	 *						Por enquanto só tanh como função de ativação disponível
-	 * @Return float		saída do neurônio
+	Derivada da função de ativação
+	@param[in] float		soma ponderada das entradas e pesos do neurônio
+		TODO: Por enquanto só tem a derivada de tanh como função de ativação disponível. 
+			@param[in] string		função a ser utilizada para ativação. Aqui será utilizada a derivada.
+			Possibilitar entrada de texto ex.: "tanh" para escolher a função de ativação
+	@return[out] float		saída do neurônio
 	 */
 	static float activFunDerivative(float net);
-
-
-	//
-	//
-	///*
-	// * Programa principal
-	// */
-	//void main();
-	//
-	//
-	///*
-	// * Programa principal
-	// */
-	//void main2();
+	
 
 	// tamanho máximo de array aleatório
 	int _sizeLimit = 250000;

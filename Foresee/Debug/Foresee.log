@@ -1,6 +1,1 @@
-﻿  NeuralNet.cpp
-e:\documentos\visual studio 2015\projects\foresee\foresee\neuralnet.cpp(71): warning C4018: '<': signed/unsigned mismatch
-e:\documentos\visual studio 2015\projects\foresee\foresee\neuralnet.cpp(145): warning C4018: '<': signed/unsigned mismatch
-  Foresee.cpp
-  Generating Code...
-  Foresee.vcxproj -> E:\Documentos\Visual Studio 2015\Projects\Foresee\Debug\Foresee.exe
+﻿LINK : fatal error LNK1168: cannot open E:\Documentos\Visual Studio 2015\Projects\Foresee\Debug\Foresee.exe for writing
