@@ -123,13 +123,19 @@ vector<vector<float>> NeuralNet::multiplyMatrix(vector<vector<float>> matrix_1, 
 }
 
 void NeuralNet::sumToVector(vector<float> &row_1, vector<float> row_2) {
-	if (row_1.size() == row_2.size()) {
-		for (unsigned int element = 0; element < row_1.size(); element++) {
-			row_1.at(element) = row_1.at(element) + row_2.at(element);
-		}
+	if (row_1.size() == 0) {
+		row_1 = row_2;
 	}
 	else {
-		printf("%s", "Vetores de tamanhos incompatíveis");
+		if (row_1.size() == row_2.size()) {
+			for (unsigned int element = 0; element < row_1.size(); element++) {
+				row_1.at(element) = row_1.at(element) + row_2.at(element);
+			}
+
+		}
+		else {
+			printf("%s", "Vetores de tamanhos incompatíveis");
+		}
 	}
 }
 

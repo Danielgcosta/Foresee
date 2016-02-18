@@ -57,7 +57,8 @@ void main() {
 			// Cálculo dos erros para esta amostra
 			float error = NeuralNet::calculateOutputNeuronError(target, output, net);
 			outputLayer_errorAccumulator.push_back(error);
-			NeuralNet::sumToVector(hiddenLayer_error,NeuralNet::calculateHiddenNeuronError(error, outputLayer_weightMatrix, hiddenLayer_net));
+			auto hiddenNeuronError = NeuralNet::calculateHiddenNeuronError(error, outputLayer_weightMatrix, hiddenLayer_net);
+			NeuralNet::sumToVector(hiddenLayer_error,hiddenNeuronError);
 		
 			// VISUALIZAÇÃO
 			//printf("%s\n", "_________________________");
@@ -122,7 +123,7 @@ void main() {
 		vector<float> outputLayer_output = NeuralNet::activationFunction(NeuralNet::feedForward(hiddenLayer_output, outputLayer_weightMatrix));
 		float output = outputLayer_output.at(0);
 
-		printf("%s %i %s %f %s %3.2f%s\n", "iteracao: ", epoch + 1, "previsao: ", output, "erro: ", abs(output - 1.05) * 100 / 1.05, "%");
+		printf("%s %i %s %f %s %3.2f%s\n", "iteracao: ", epoch + 1, "previsao: ", output, "erro: ", abs(output - 21) * 100 / 21, "%");
 	}
 
 	int i;
